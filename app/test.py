@@ -50,7 +50,7 @@ async def test_post(request):
 
 class Button(web.View):
     async def get(self):
-        session = get_session()
+        session = await get_session(self.request)
 
         print(session)
 
@@ -68,10 +68,11 @@ class Button(web.View):
           return web.Response(text=json.dumps(info), status=500)
 
 
-app = web.Application()
+app = web.Application(middlewares=[aiohttp_session.SimpleCookieStorage()])
 aiohttp_jinja2.setup(app,
                      # loader=jinja2.FileSystemLoader('C:/Users/Алексей/PycharmProjects/Guardian/'))
                      loader=jinja2.FileSystemLoader('C:/Users/MaksyaginAV/PycharmProjects/testhttp'))
+
 app.router.add_get('/', test_get)
 app.router.add_post('/send/', test_post)
 app.router.add_get('/auth/', Button)
