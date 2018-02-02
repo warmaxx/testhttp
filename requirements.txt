@@ -1,0 +1,7 @@
+aiohttp
+asyncpg
+aiohttp_jinja2
+jinja2
+aiohttp_session
+aiohttp_session[secure]
+cryptography
