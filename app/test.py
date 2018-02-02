@@ -49,7 +49,7 @@ async def test_post(request):
         return web.Response(text=json.dumps(info), status=500)
 
 class Button(web.View):
-    async def Button(web.View):
+    async def get(self):
         session = get_session()
 
         print(session)
