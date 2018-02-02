@@ -51,8 +51,12 @@ async def test_post(request):
 class Button(web.View):
     async def get(self):
         session = await get_session(self.request)
-
         print(session)
+        # if session['new'] == True:
+        #     print('NEW', session.new)
+
+
+
 
         try:
             print(self.request.rel_url)
@@ -68,7 +72,7 @@ class Button(web.View):
           return web.Response(text=json.dumps(info), status=500)
 
 
-app = web.Application(middlewares=[aiohttp_session.SimpleCookieStorage()])
+app = web.Application(middlewares=[aiohttp_session.session_middleware(aiohttp_session.SimpleCookieStorage())])
 aiohttp_jinja2.setup(app,
                      # loader=jinja2.FileSystemLoader('C:/Users/Алексей/PycharmProjects/Guardian/'))
                      loader=jinja2.FileSystemLoader('C:/Users/MaksyaginAV/PycharmProjects/testhttp'))
